@@ -1,0 +1,15 @@
+#include <stdio.h>
+
+int main() {
+int a1[]={1,2,3,4,5};
+int n=5;
+int i;
+int last=a1[n-1];
+for(int i=n-1;i>=0;i--){
+    a1[i]=a1[i-1];
+}
+a1[0]=last;
+for(i=0;i<n;i++)
+printf("%d",a1[i]);
+    return 0;
+}
