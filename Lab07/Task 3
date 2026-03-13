@@ -1,0 +1,52 @@
+#include <stdio.h>
+int main() {
+    int pass[10], fail[10];
+    int a = 0, b = 0;
+    int sumPass = 0, sumFail = 0;
+    int mark, total = 0;
+
+    while (total < 10) {
+        printf("Enter mark for student %d: ", total + 1);
+        scanf("%d", &mark);
+
+        if (mark == -1) {
+            break;
+        }
+
+        if (mark >= 5 && mark <= 10) {
+            pass[a] = mark;
+            sumPass = sumPass + mark;
+            a++;
+        } else {
+            fail[b] = mark;
+            sumFail = sumFail + mark;
+            b++;
+        }
+
+        total++;
+    }
+
+    printf("Pass Array: ");
+for(int i=0;i<a;i++) {
+        printf("%d ", pass[i]);
+
+    }
+    printf("\n");
+
+    if (a > 0) {
+        printf("Pass Average: %d\n", sumPass / a);
+    }
+
+    printf("Fail Array:");
+for(int i=0;i<b;i++) {
+        printf("%d ", fail[i]);
+
+    }
+printf("\n");
+    if (b > 0) {
+        printf("Fail Average: %d\n", sumFail / b);
+    }
+
+    printf("\n");
+    return 0;
+}
