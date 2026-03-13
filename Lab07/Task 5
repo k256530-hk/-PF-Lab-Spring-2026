@@ -1,0 +1,14 @@
+#include <stdio.h>
+int main() {
+    int a1[]={1,4,7,3,8,2,9,10,5,6};
+
+    int max = a1[0], min = a1[0];
+for(int i=1;i<10;i++) {
+        if (a1[i] > max) 
+        max = a1[i];
+        if (a1[i] < min)
+        min = a1[i];
+    }
+    printf("Max = %d, Min = %d\n Difference = %d", max, min, max - min);
+    return 0;
+}
