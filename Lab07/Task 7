@@ -1,0 +1,19 @@
+#include <stdio.h>
+int main() {
+    int a1[]={2,3,5,3,5,9,1,2,8,1};
+int i;
+for(i=1;i<10;i++){
+    for(int j = 0;j<i;j++) {
+        if (a1[j] != -1 && a1[j] == a1[i]) {
+                a1[i] = -1;
+                break;
+            }
+        }
+    }
+
+for(i=0;i<10;i++){
+    printf("%d ", a1[i]);
+    }
+    printf("\n");
+    return 0;
+}
