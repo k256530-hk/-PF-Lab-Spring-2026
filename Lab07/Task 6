@@ -1,0 +1,21 @@
+#include <stdio.h>
+int main() {
+    char str[10]={"Program"};
+
+    int vowels = 0, consonants = 0, i = 0;
+    while (str[i] != '\0') {
+        char c = str[i];
+        if (c >= 'A' && c <= 'Z')
+        c = c + 32;
+
+        if (c >= 'a' && c <= 'z') {
+            if (c=='a' || c=='e' || c=='i' || c=='o' || c=='u')
+                vowels++;
+            else
+                consonants++;
+        }
+        i++;
+    }
+    printf("Vowels: %d\nConsonants: %d\n", vowels, consonants);
+    return 0;
+}
