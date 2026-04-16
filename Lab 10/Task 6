@@ -1,0 +1,30 @@
+#include <stdio.h>
+#include <string.h>
+
+//
+char fileNames[3][50];
+int fileGrades[3];
+
+int main() {
+    int count = 0;
+
+  
+    printf("Enter 3 student names and their grades:\n");
+    for (int i = 0; i < 3; i++) {
+        printf("Student %d Name: ", i + 1);
+        scanf("%49s", fileNames[i]);
+        printf("Student %d Grade: ", i + 1);
+        scanf("%d", &fileGrades[i]);
+        count++;
+    }
+
+    printf("\nRecords written to grades.txt (simulated)\n");
+
+    
+    printf("\n--- Stored Records ---\n");
+    for (int i = 0; i < count; i++) {
+        printf("Name: %s | Grade: %d\n", fileNames[i], fileGrades[i]);
+    }
+
+    return 0;
+}
