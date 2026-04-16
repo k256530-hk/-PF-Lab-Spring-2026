@@ -1,0 +1,42 @@
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+    char words[6][20];
+    int seen[6] = {0};
+
+ 
+    printf("Enter 6 words:\n");
+    for (int i = 0; i < 6; i++) {
+        printf("Word %d: ", i + 1);
+        scanf("%19s", words[i]);
+    }
+
+    printf("\n--- Word Frequency ---\n");
+
+ 
+    for (int i = 0; i < 6; i++) {
+        if (seen[i]) continue; 
+
+        int count = 1;
+       
+        for (int j = i + 1; j < 6; j++) {
+            if (!seen[j] && strcmp(words[i], words[j]) == 0) {
+                count++;
+                seen[j] = 1;
+            }
+        }
+        seen[i] = 1;
+
+        printf("Word: %s | Count: %d\n", words[i], count);
+
+        
+        printf("Characters: ");
+        for (int j = 0; words[i][j] != '\0'; j++) {
+            printf("%c ", words[i][j]);
+        }
+        printf("\n");
+    }
+
+    return 0;
+}
