@@ -1,0 +1,48 @@
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+    char master[] = "Secure@123";
+    char input[50];
+    int attempts = 0;
+
+    while (attempts < 3) {
+        printf("Enter password: ");
+        fgets(input, sizeof(input), stdin);
+        
+    int len = strlen(input);
+        if (len > 0 && input[len - 1] == '\n')
+            input[--len] = '\0';
+
+  
+        if (len == 0) {
+            printf("Password cannot be empty.\n");
+            continue;
+        }
+
+        attempts++;
+
+       
+        if (strcmp(input, master) == 0) {
+            printf("Access Granted!\n");
+            return 0;
+        } else {
+         
+            if (attempts == 2) {
+                printf("Hint - First 3 characters: ");
+                printf("%.3s\n", master);
+            }
+
+            if (strcmp(input, master) < 0)
+                printf("Input is alphabetically BEFORE the stored password.\n");
+            else
+                printf("Input is alphabetically AFTER the stored password.\n");
+
+            if (attempts < 3)
+                printf("Incorrect password. %d attempt(s) remaining.\n", 3 - attempts);
+        }
+    }
+
+    printf("Account locked! Too many failed attempts.\n");
+    return 0;
+}
