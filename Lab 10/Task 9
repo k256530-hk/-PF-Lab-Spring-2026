@@ -1,0 +1,40 @@
+#include <stdio.h>
+
+int main() {
+    FILE *fptr;
+
+    fptr = fopen("config.txt", "r");
+
+    if (fptr == NULL) {
+      
+        printf("config.txt not found. Creating default config...\n");
+
+    
+        fptr = fopen("config.txt", "w");
+        if (fptr == NULL) {
+            printf("Error: Could not create config.txt.\n");
+            return 1;
+        }
+      
+        fprintf(fptr, "max_users=50\n");
+        fprintf(fptr, "timeout=30\n");
+        fprintf(fptr, "debug_mode=0\n");
+
+        fclose(fptr);
+        printf("Default config.txt created successfully.\n");
+
+    } else {
+      
+        printf("config.txt found. Reading settings...\n\n");
+
+        char line[100];
+        while (fgets(line, sizeof(line), fptr) != NULL) {
+            printf("%s", line);
+        }
+
+        fclose(fptr);
+        printf("\nConfiguration loaded successfully.\n");
+    }
+
+    return 0;
+}
