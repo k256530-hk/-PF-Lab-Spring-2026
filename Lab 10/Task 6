@@ -1,30 +1,42 @@
 #include <stdio.h>
-#include <string.h>
-
-//
-char fileNames[3][50];
-int fileGrades[3];
 
 int main() {
-    int count = 0;
+    char name[50];
+    int grade;
+    FILE *fptr;
+    fptr = fopen("grades.txt", "w");
+    if (fptr == NULL) {
+        printf("Error: Could not open grades.txt for writing.\n");
+        return 1;
+    }
 
-  
+
     printf("Enter 3 student names and their grades:\n");
     for (int i = 0; i < 3; i++) {
         printf("Student %d Name: ", i + 1);
-        scanf("%49s", fileNames[i]);
+        scanf("%49s", name);
         printf("Student %d Grade: ", i + 1);
-        scanf("%d", &fileGrades[i]);
-        count++;
+        scanf("%d", &grade);
+        fprintf(fptr, "%s %d\n", name, grade);
     }
-
-    printf("\nRecords written to grades.txt (simulated)\n");
 
     
-    printf("\n--- Stored Records ---\n");
-    for (int i = 0; i < count; i++) {
-        printf("Name: %s | Grade: %d\n", fileNames[i], fileGrades[i]);
+    fclose(fptr);
+    printf("\nRecords saved to grades.txt\n");
+
+    
+    fptr = fopen("grades.txt", "r");
+    if (fptr == NULL) {
+        printf("Error: Could not open grades.txt for reading.\n");
+        return 1;
     }
 
+
+    printf("\n--- Stored Records ---\n");
+    while (fscanf(fptr, "%s %d", name, &grade) == 2) {
+        printf("Name: %s | Grade: %d\n", name, grade);
+    }
+
+    fclose(fptr);
     return 0;
 }
