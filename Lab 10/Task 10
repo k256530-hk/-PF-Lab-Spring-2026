@@ -1,0 +1,53 @@
+#include <stdio.h>
+
+int main() {
+    char name[50];
+    int s1, s2, s3;
+    FILE *fptr;
+
+    
+    printf("Enter student name: ");
+    scanf("%s", name);
+    printf("Enter score 1: ");
+    scanf("%d", &s1);
+    printf("Enter score 2: ");
+    scanf("%d", &s2);
+    printf("Enter score 3: ");
+    scanf("%d", &s3);
+
+    float avg = (s1 + s2 + s3) / 3.0f;
+    char *status = (avg >= 50.0f) ? "Pass" : "Fail";
+
+  
+    fptr = fopen("report.txt", "w+");
+    if (fptr == NULL) {
+        printf("Error: Could not open report.txt.\n");
+        return 1;
+    }
+
+    
+    fprintf(fptr, "==============================\n");
+    fprintf(fptr, "       STUDENT REPORT CARD    \n");
+    fprintf(fptr, "==============================\n");
+    fprintf(fptr, "Name   : %s\n", name);
+    fprintf(fptr, "Score 1: %d\n", s1);
+    fprintf(fptr, "Score 2: %d\n", s2);
+    fprintf(fptr, "Score 3: %d\n", s3);
+    fprintf(fptr, "Average: %.2f\n", avg);
+    fprintf(fptr, "Status : %s\n", status);
+    fprintf(fptr, "==============================\n");
+
+  
+    rewind(fptr);
+
+    
+    printf("\n--- Report Card ---\n");
+    char line[100];
+    while (fgets(line, sizeof(line), fptr) != NULL) {
+        printf("%s", line);
+    }
+
+  
+    fclose(fptr);
+    return 0;
+}
