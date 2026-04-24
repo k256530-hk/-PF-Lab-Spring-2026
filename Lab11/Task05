@@ -1,0 +1,65 @@
+#include <stdio.h>
+#include <string.h>
+
+struct Department {
+    char deptCode[10];
+    char deptName[50];
+};
+
+struct Course {
+    char courseCode[10];
+    char courseName[60];
+    int creditHours;
+    struct Department dept;
+};
+
+void filterByDept(struct Course courses[], int n, char *code) {
+    printf("\nCourses in department %s:\n", code);
+    int found = 0;
+    for (int i = 0; i < n; i++) {
+        if (strcmp(courses[i].dept.deptCode, code) == 0) {
+            printf("%s - %s (%d credits)\n",
+                   courses[i].courseCode, courses[i].courseName, courses[i].creditHours);
+            found = 1;
+        }
+    }
+    if (!found) printf("No courses found.\n");
+}
+
+int main() {
+    struct Course c[3];
+    for (int i = 0; i < 3; i++) {
+        printf("\nCourse %d:\n", i + 1);
+
+        printf("Course Code: ");
+        scanf("%s", c[i].courseCode);
+
+        printf("Dept Code: ");
+        scanf("%s", c[i].dept.deptCode);
+
+        printf("Credit Hours: ");
+        scanf("%d", &c[i].creditHours);
+
+        while (getchar() != '\n');
+        printf("Course Name: ");
+        fgets(c[i].courseName, 60, stdin);
+        c[i].courseName[strcspn(c[i].courseName, "\n")] = '\0';
+
+        printf("Dept Name: ");
+        fgets(c[i].dept.deptName, 50, stdin);
+        c[i].dept.deptName[strcspn(c[i].dept.deptName, "\n")] = '\0';
+    }
+
+    printf("\nAll Courses:\n");
+    for (int i = 0; i < 3; i++) {
+        printf("%s | %s | %d credits | %s (%s)\n",
+               c[i].courseCode, c[i].courseName, c[i].creditHours,
+               c[i].dept.deptName, c[i].dept.deptCode);
+    }
+
+    char deptCode[10];
+    printf("\nEnter dept code to filter: ");
+    scanf("%s", deptCode);
+    filterByDept(c, 3, deptCode);
+    return 0;
+}
