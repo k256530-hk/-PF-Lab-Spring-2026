@@ -1,0 +1,17 @@
+#include <stdio.h>
+
+int countUpper(char *str) {
+    if (*str == '\0')
+        return 0;
+    int isUpper = (*str >= 'A' && *str <= 'Z') ? 1 : 0;
+    int isDigit = (*str >= '0' && *str <= '9') ? 1 : 0;
+    return isUpper + isDigit + countUpper(str + 1);
+}
+
+int main() {
+    char password[100];
+    printf("Enter password: ");
+    scanf("%s", password);
+    printf("Uppercase + digit count: %d\n", countUpper(password));
+    return 0;
+}
