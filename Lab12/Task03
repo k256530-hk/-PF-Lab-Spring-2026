@@ -1,0 +1,43 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    int n;
+    printf("Enter number of sensors (N): ");
+    scanf("%d", &n);
+
+    float *sensor_calloc = (float *)calloc(n, sizeof(float));
+
+
+    float *sensor_malloc = (float *)malloc(n * sizeof(float));
+
+    if (sensor_calloc == NULL || sensor_malloc == NULL) {
+        printf("Memory allocation failed!\n");
+        return 1;
+    }
+
+    printf("\n--- Initial Values (before any assignment) ---\n");
+    printf("%-10s %-20s %-20s\n", "Sensor", "calloc value", "malloc value");
+    printf("%-10s %-20s %-20s\n", "------", "------------", "------------");
+    for (int i = 0; i < n; i++) {
+        printf("%-10d %-20.6f %-20.6f\n", i + 1, sensor_calloc[i], sensor_malloc[i]);
+    }
+    
+    printf("\nEnter temperature readings for %d sensors:\n", n);
+    for (int i = 0; i < n; i++) {
+        printf("Sensor %d temperature: ", i + 1);
+        scanf("%f", &sensor_calloc[i]);
+    }
+
+    printf("\n--- Final Sensor Buffer ---\n");
+    for (int i = 0; i < n; i++) {
+        printf("Sensor %d: %.2f°C\n", i + 1, sensor_calloc[i]);
+    }
+
+    free(sensor_calloc);
+    free(sensor_malloc);
+    sensor_calloc = NULL;
+    sensor_malloc = NULL;
+
+    return 0;
+}
